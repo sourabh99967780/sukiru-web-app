@@ -1,7 +1,11 @@
 <template>
-  <div>
-    This will be the Navbar
-  </div>
+  <v-app-bar app>
+    <v-container>
+      <v-avatar :tile="true">
+        <img :src="require('@/assets/logo.svg')" alt="logo" />
+      </v-avatar>
+    </v-container>
+  </v-app-bar>
 </template>
 
 <script>
