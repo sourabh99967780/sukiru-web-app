@@ -28,12 +28,15 @@
     <v-btn ripple depressed color="primary" @click="connect()"
       >Connect to the Database</v-btn
     >
+    <p v-if="connectionSucces">Connected to the Database</p>
     <v-textarea
       rounded
       v-model="query"
       placeholder="Just Enter Match (n) return n;"
     ></v-textarea>
     <v-btn depressed color="primary" @click="testQuery()">Run Query</v-btn>
+
+    <p v-if="!!records">Getting Results</p>
     <div v-for="record in dbData" :key="record.keys[0]">{{ record }}</div>
   </v-main>
 </template>
@@ -49,7 +52,8 @@ export default {
       username: process.env.VUE_APP_NEO4J_USER,
       password: process.env.VUE_APP_NEO4J_PASSWORD,
       dbData: Array,
-      query: ''
+      query: '',
+      connectionSucces: false
     }
   },
   methods: {
@@ -65,6 +69,7 @@ export default {
         )
         .then(driver => {
           console.log(driver)
+          this.connectionSucces = true
         })
     },
     driver() {
